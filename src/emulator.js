@@ -22,7 +22,7 @@ const endpoint = function(method, path, mockFunction) {
     debugFinest(req);
 
     debugFine('invoking mockFunction')
-    const mockerResult = mockFunction();
+    const mockerResult = mockFunction(req.payload);
     debugFine(mockerResult);
 
     reply(mockerResult.value)
