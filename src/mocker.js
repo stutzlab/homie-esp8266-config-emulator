@@ -1,15 +1,15 @@
 module.exports.settings = {
-  errorRate : .2
+  failureRate : .2
 }
 
 module.exports.init = function(options) {
-  module.exports.settings.errorRate = (options && options.errorRate) || module.exports.settings.errorRate;
+  module.exports.settings.failureRate = (options && options.failureRate) || module.exports.settings.failureRate;
 }
 
 const randomFail = function() {
   var rand = Math.random();
 
-  if (rand < module.exports.settings.errorRate) {
+  if (rand < module.exports.settings.failureRate) {
     return true;
   }
 

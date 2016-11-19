@@ -8,7 +8,14 @@ const debugFinest = require('debug')('finest')
 const Hapi = require('hapi');
 const mocker = require('./mocker')
 
-mocker.init();
+var settings = {};
+var failureRate = null || process.env.FAILURE_RATE;
+debugFine(`failure rate: ${failureRate}`);
+if (failureRate) {
+  settings.failureRate = failureRate;
+}
+debugFine(`settings: ${JSON.stringify(settings)}`);
+mocker.init(settings);
 
 var server = new Hapi.Server();
 server.connection({port: 5000});

@@ -8,7 +8,89 @@ Some benefits we expect:
 * Don't need the device to be already finish and running to start the configuration implementation
 
 
-## The emulator
+## Running using Docker
+
+We highly recommend you to use Docker to run the emulator. To do so, you have two options:
+* With [**docker-compose**](https://docs.docker.com/compose/)  by  downloading the file [docker-compose.yml](https://raw.githubusercontent.com/stutzlab/homie-esp8266-config-emulator/master/docker-compose.yml) file and running the following command at the same dir you downloaded the file:
+```
+docker-compose up -d
+```
+
+* Running directly the **docker run** command as follows:
+```
+docker run -d -p 5000:5000 stutzlab/homie-esp8266-config-emulator:0.1.0
+```
+
+## Running directly with `node` command
+To run directly with your local NodeJS runtime, clone this repo and then run the following command at the root of the project:
+```
+node src/emulator.js
+```
+
+Optionally you can pass environment variables to debug and change the failure rate as follows:
+```
+DEBUG=fine,info node src/emulator.js
+```
+or
+```
+FAILURE_RATE=.3 node src/emulator.js
+```
+or
+```
+DEBUG=finest,fine,info FAILURE_RATE=.3 node src/emulator.js
+```
+
+
+
+## The Emulator
+
+The emulator is not fully functional as a real device, but it is fine to support the captive portal development.
+
+### Random Failure
+All the endpoints has a random failure function to emulate a unexpected failure at anytime. The failure rate is configurable and can be set as enviroment variable
+
+### Endpoints
+
+#### `/heart`
+Simply returns a **204** return code. There is no content returned.
+
+---
+
+#### `/device-info`
+Returns a fake device info. The content is always the same.
+
+---
+
+#### `/networks`
+Returns a list with fake networks.
+Also, during the **5 seconds** after the endpoint was invoked, it will return a **503** code and an error message to emulate the _"Initial Wi-Fi scan not finished yet"_ behavior.
+
+---
+
+#### `/wifi/connect`
+Returns a success message if all the required parameters (**including wifi password**) are provided. If some of the required parameters are missing it returns a **400 Bad Request** and a message with the missing parameters list.
+
+---
+
+#### `/wifi/status`
+If this endpoint is invoked before the `wifi/connect` endpoint it returns randomly one of the following: `disconnected, connection_lost, connect_failed, no_ssid_available, idle`.
+
+If this endpoint is invoked after the `wifi/connect` endpoint it will return `{ "status": "connected", "local_ip": "10.1.1.1" }`
+
+---
+
+#### `/config`
+Returns a success message if all the required parameters (**including wifi password**) are provided. If some of the required parameters are missing it returns a **400 Bad Request** and a message with the missing parameters list.
+
+Also, during the **5 seconds** after the endpoint was invoked, it will return a **403** code and an error message to emulate the _"Device already configured"_ behavior.
+
+---
+
+#### `/proxy/control`
+Returns a success message if all the required parameter **enabled** is provided. If the parameter is missing the endpoint returns a **400 Bad Request** and a message with the missing parameters list.
+
+
+## The HTTP JSON API
 
 The emulator will have the same endpoints specified in the [HTTP JSON config API](https://homie-esp8266.readme.io/docs/http-json-api), i.e.:
 

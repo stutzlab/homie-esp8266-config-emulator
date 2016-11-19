@@ -5,3 +5,6 @@ services:
     build: ./src
     ports:
       - 5000:5000
+    environment:
+      - "DEBUG=info,fine"
+      - "FAILURE_RATE=.1"
