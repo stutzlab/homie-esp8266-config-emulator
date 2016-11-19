@@ -34,7 +34,12 @@ const endpoint = function(method, path, mockFunction) {
 
     reply(mockerResult.value)
       .type('application/json')
-      .code(mockerResult.code);
+      .code(mockerResult.code)
+      .header('Access-Control-Allow-Origin', '*')
+      .header('Access-Control-Allow-Credentials', true)
+      .header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+      .header('Access-Control-Allow-Headers', 'Content-Type')
+;
 
     debugFine('reply sent.');
   }
@@ -43,11 +48,27 @@ const endpoint = function(method, path, mockFunction) {
   server.route({
     method: method,
     path: path,
-
     handler: mockHandler
+  });
+
+
+  server.route({
+    method: 'OPTIONS',
+    path: path,
+
+    handler: function(req, reply) {
+      debugFinest('Enabling CORS...');
+      reply({})
+      .header('Access-Control-Allow-Origin', '*')
+      .header('Access-Control-Allow-Credentials', true)
+      .header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+      .header('Access-Control-Allow-Headers', 'Content-Type')
+      .code(200);
+    }
 
   });
 }
+
 
 // /heart endpoint [start]
 endpoint('GET', '/heart', mocker.heart);
