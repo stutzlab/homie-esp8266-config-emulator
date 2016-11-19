@@ -25,5 +25,9 @@
   "bugs": {
     "url": "https://github.com/stutzlab/homie-esp8266-http-json-api-emulator/issues"
   },
-  "homepage": "https://github.com/stutzlab/homie-esp8266-http-json-api-emulator#readme"
+  "homepage": "https://github.com/stutzlab/homie-esp8266-http-json-api-emulator#readme",
+  "dependencies": {
+    "debug": "^2.3.2",
+    "hapi": "^15.2.0"
+  }
 }
