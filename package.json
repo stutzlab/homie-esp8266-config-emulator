@@ -1,0 +1,29 @@
+{
+  "name": "homie-esp8266-http-json-api-emulator",
+  "version": "0.1.0",
+  "description": "an emulator for the configuration HTTP JSON API. More about the API: https://homie-esp8266.readme.io/docs/http-json-api. The ideia is to help develop the Captive Portal and other stuff that will use the HTTP JSON API in your application without needing to use an actual ESP8266, especially in early development stages.",
+  "main": "mocker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stutzlab/homie-esp8266-http-json-api-emulator.git"
+  },
+  "keywords": [
+    "esp8266",
+    "homie",
+    "stutz",
+    "emulator",
+    "http",
+    "json",
+    "api",
+    "captive"
+  ],
+  "author": "Stutz Lab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stutzlab/homie-esp8266-http-json-api-emulator/issues"
+  },
+  "homepage": "https://github.com/stutzlab/homie-esp8266-http-json-api-emulator#readme"
+}

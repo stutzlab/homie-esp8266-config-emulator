@@ -1,0 +1,7 @@
+version: '2'
+services:
+  mocker:
+    image: stutzlab/homie-esp8266-http-json-api-emulator:0.1.0
+    build: ./src
+    ports:
+      - 4100:80
