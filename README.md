@@ -1,4 +1,4 @@
-# Emulator for the [HTTP JSON config API](https://homie-esp8266.readme.io/docs/http-json-api) of the [Homie for ESP8266](https://github.com/marvinroger/homie-esp8266)
+# [Homie for ESP8266](https://github.com/marvinroger/homie-esp8266) [HTTP JSON config API](https://homie-esp8266.readme.io/docs/http-json-api) emulator
 
 The main porpuse of the emulator is to help developers to build their custom captive portal or something else that will use the [HTTP JSON config API](https://homie-esp8266.readme.io/docs/http-json-api) to setup their device that uses [Homie for ESP8266](https://github.com/marvinroger/homie-esp8266)  without the need to have the actual device.
 
