@@ -54,6 +54,8 @@ All the endpoints has a random failure function to emulate a unexpected failure 
 #### `/`
 This endpoint serves the **ui_bundle.gz** file. This file must be in the **captive** folder. If using Docker, map the volume; if not, copy the file to this folder.
 
+---
+
 #### `/heart`
 Simply returns a **204** return code. There is no content returned.
 
