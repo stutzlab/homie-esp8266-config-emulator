@@ -216,8 +216,8 @@ module.exports.proxyControl = function(config) {
   //validate the configuration
   var missingFields = '';
 
-  if (typeof(config.enabled) === "undefined") {
-    missingFields += ', enabled';
+  if (typeof(config.enable) === "undefined") {
+    missingFields += ', enable';
   }
   if (missingFields.length > 0) {
     return {
