@@ -44,7 +44,7 @@ DEBUG=finest,fine,info FAILURE_RATE=.3 node src/emulator.js
 
 ## The Emulator
 
-The emulator is not fully functional as a real device, but it is fine to support the captive portal development.
+The emulator is not fully functional as a real device, but it is fine to support the captive portal development. It handles the API calls and serves the ui_bundle.gz file, wich is the actual captive portal interface.
 
 ### Random Failure
 All the endpoints has a random failure function to emulate a unexpected failure at anytime. The failure rate is configurable and can be set as enviroment variable
