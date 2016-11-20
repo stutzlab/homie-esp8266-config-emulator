@@ -1,10 +1,13 @@
 version: '2'
 services:
   mocker:
-    image: stutzlab/homie-esp8266-config-emulator:0.1.0
+    image: stutzlab/homie-esp8266-config-emulator:latest
     build: ./src
+    network_mode: bridge
     ports:
       - 5000:5000
     environment:
       - "DEBUG=info,fine"
-      - "FAILURE_RATE=.1"
+      - "FAILURE_RATE=0.1"
+    # volumes:
+    #   - [your_ui_bundle_gz_file]:/usr/src/app/captive/ui_bundle.gz

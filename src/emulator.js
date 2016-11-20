@@ -18,7 +18,9 @@ debugFine(`settings: ${JSON.stringify(settings)}`);
 mocker.init(settings);
 
 var server = new Hapi.Server();
+server.register(require('inert')); // to serve static files
 server.connection({port: 5000});
+
 
 //Function that configures a simple endpoint in the API.
 //If more configuration params is needed, configure the route manually
@@ -51,7 +53,7 @@ const endpoint = function(method, path, mockFunction) {
     handler: mockHandler
   });
 
-
+  // add CORS Suport. It's fine to do it here because it is just an emulator.
   server.route({
     method: 'OPTIONS',
     path: path,
@@ -98,6 +100,15 @@ endpoint('PUT', '/config', mocker.config);
 endpoint('PUT', '/proxy/control', mocker.proxyControl);
 // /proxy/control [end]
 
+server.route({
+    method: 'GET',
+    path: '/',
+    handler: function (request, reply) {
+            reply.file('captive/ui_bundle.gz')
+            .header('Content-Type', 'text/html')
+            .header('Content-Encoding', 'gzip');
+        }
+});
 
 //Start the emulator server
 server.start((err) => {

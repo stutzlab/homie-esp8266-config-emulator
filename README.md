@@ -18,7 +18,7 @@ docker-compose up -d
 
 * Running directly the **docker run** command as follows:
 ```
-docker run -d -p 5000:5000 stutzlab/homie-esp8266-config-emulator:0.1.0
+docker run -d -p 5000:5000 -v [absolute_path_to_your_ui_bundle_gz]:/usr/src/app/captive/ui_bundle.gz stutzlab/homie-esp8266-config-emulator:0.1.1
 ```
 
 ## Running directly with `node` command
@@ -50,6 +50,9 @@ The emulator is not fully functional as a real device, but it is fine to support
 All the endpoints has a random failure function to emulate a unexpected failure at anytime. The failure rate is configurable and can be set as enviroment variable
 
 ### Endpoints
+
+#### `/`
+This endpoint serves the **ui_bundle.gz** file. This file must be in the **captive** folder. If using Docker, map the volume; if not, copy the file to this folder.
 
 #### `/heart`
 Simply returns a **204** return code. There is no content returned.
