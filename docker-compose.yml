@@ -1,7 +1,7 @@
 version: '2'
 services:
   mocker:
-    image: stutzlab/homie-esp8266-config-emulator:latest
+    image: stutzlab/homie-esp8266-config-emulator:1.0.1
     build: ./src
     network_mode: bridge
     ports:
