@@ -19,14 +19,7 @@ mocker.init(settings);
 
 var server = new Hapi.Server();
 server.register(require('inert')); // to serve static files
-server.connection({
-  host: '0.0.0.0',
-  port: 5000,
-  routes: {
-    cors: true
-  }
-
-});
+server.connection({port: 5000});
 
 
 //Function that configures a simple endpoint in the API.
@@ -60,6 +53,22 @@ const endpoint = function(method, path, mockFunction) {
     handler: mockHandler
   });
 
+  // add CORS Suport. It's fine to do it here because it is just an emulator.
+  server.route({
+    method: 'OPTIONS',
+    path: path,
+
+    handler: function(req, reply) {
+      debugFinest('Enabling CORS...');
+      reply({})
+      .header('Access-Control-Allow-Origin', '*')
+      .header('Access-Control-Allow-Credentials', true)
+      .header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+      .header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With')
+      .code(200);
+    }
+
+  });
 }
 
 
